@@ -1,26 +1,26 @@
 import React from 'react';
- 
+
 function TodoRow({item, toggle})
 {
- 
+
     const onToggle = () => {
         toggle(item);
     };
- 
+
     return (
-<tr>
-<td>
+        <tr>
+            <td>
                 { item.action }
-</td>
-<td>
-<input
+            </td>
+            <td>
+                <input
                     type="checkbox"
                     checked={ item.done }
                     onChange={ onToggle }
                     />
-</td>
-</tr>
+            </td>
+        </tr>
     );
 }
- 
+
 export default TodoRow;
