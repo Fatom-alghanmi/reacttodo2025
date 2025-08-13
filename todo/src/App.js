@@ -1,4 +1,3 @@
-
 // import logo from './logo.svg';
 import React, { useState, useEffect } from 'react';
 import './App.css';
@@ -35,7 +34,14 @@ function App() {
     );
     setTodoItems(updatedTodos);
      localStorage.setItem("todos", JSON.stringify(updatedTodos));
-     
+  };
+
+  const deleteTodo = (todo) => {
+    if (todo.done) {
+      const updatedTodos = todoItems.filter(item => item.action !== todo.action);
+      setTodoItems(updatedTodos);
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    }
   };
 
   const editTodo = (oldItem, newAction) => {
@@ -48,16 +54,6 @@ function App() {
 
   const clearCompleted = () => {
     setTodoItems(todoItems.filter(item => !item.done));
-  };
-  
-  
-
-  const deleteTodo = (todo) => {
-    if (todo.done) {
-      const updatedTodos = todoItems.filter(item => item.action !== todo.action);
-      setTodoItems(updatedTodos);
-      localStorage.setItem("todos", JSON.stringify(updatedTodos));
-    }
   };
 
 
@@ -105,17 +101,17 @@ function App() {
             <th>Action</th>
             <th>Done</th>
             <th>Actions</th> {/* For edit button */}
-    </tr>
-  </thead>
-  <tbody>
-    {todoItems.filter(item => !item.done).map(item => (
-      <TodoRow
-        key={item.action}
-        item={item}
-        toggle={toggleTodo}
-        editTodo={editTodo} // only passed for incomplete
-      />
-    ))}
+          </tr>
+        </thead>
+        <tbody>
+          {todoItems.filter(item => !item.done).map(item => (
+            <TodoRow
+              key={item.action}
+              item={item}
+              toggle={toggleTodo}
+              editTodo={editTodo} // only passed for incomplete
+            />
+          ))}
         </tbody>
       </table>
 
@@ -158,7 +154,6 @@ function App() {
           </button>
         </div>
       )}
-
 
     </div>
   );
